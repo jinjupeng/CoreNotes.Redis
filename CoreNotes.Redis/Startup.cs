@@ -18,7 +18,14 @@ namespace CoreNotes.Redis
 
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddEasyCaching(options => {
+                options.UseRedis(configure => {
+                    configure.DBConfig.Endpoints.Add(
+                        new EasyCaching.Core.Configurations.ServerEndPoint("localhost", 6379)
+                    );
+                    configure.DBConfig.AllowAdmin = true;
+                }, "RedisExample");
+            });
             services.AddControllers();
         }
 
@@ -28,6 +35,7 @@ namespace CoreNotes.Redis
             {
                 app.UseDeveloperExceptionPage();
             }
+
 
             app.UseRouting();
 
