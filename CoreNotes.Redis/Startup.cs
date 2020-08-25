@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using StackExchange.Redis;
 
 namespace CoreNotes.Redis
 {
@@ -18,14 +17,6 @@ namespace CoreNotes.Redis
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddEasyCaching(options => {
-                options.UseRedis(configure => {
-                    configure.DBConfig.Endpoints.Add(
-                        new EasyCaching.Core.Configurations.ServerEndPoint("localhost", 6379)
-                    );
-                    configure.DBConfig.AllowAdmin = true;
-                }, "RedisExample");
-            });
             services.AddControllers();
         }
 
